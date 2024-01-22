@@ -1,0 +1,161 @@
+ion-content {
+    --background: transparent;
+  }
+  
+  
+  .custom-button1 img {
+    width: 20%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button1 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: 70%;
+    top: 300%;
+    z-index: 999;
+  }
+  
+  .custom-button2 img {
+    width: 30%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button2 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: 20%;
+    top: 150%;
+    transition: transform 0.3s ease;
+    z-index: 9;
+  }
+  
+  .custom-button3 img {
+    width: 30%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button3 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: -20%;
+    top: 10%;
+    z-index: 966;
+
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .custom-button4 img {
+    width: 30%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button4 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: -20%;
+    top: 30%;
+      z-index: 99;
+ 
+      transition: transform 0.3s ease;
+  }
+  
+  .custom-button5 img {
+    width: 30%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button5 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: 30%;
+    top: -100%;
+    transition: transform 0.3s ease;
+  }
+  
+  .custom-button6 img {
+    width: 35%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button6 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: -20%;
+    top: 40%;
+    transition: transform 0.3s ease;
+  }
+  
+  .custom-button7 img {
+    width: 30%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button7 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: -50%;
+    top: 30%;
+    transition: transform 0.3s ease;
+  }
+  .custom-button8 img {
+    width: 30%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button8 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: 130%;
+    top: -240%;
+    transition: transform 0.3s ease;
+    z-index: 999;
+  }
+  .custom-button9 img {
+    width: 15%; /* ajusta el porcentaje según tu preferencia */
+    height: auto; /* para mantener la proporción original */
+  }
+  
+  .custom-button9 {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: relative;
+    left: 120%;
+    top: -370%;
+  }
+  
+  .mensaje-correcto,
+  .mensaje-incorrecto {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+  }
+  .custom-button2:hover,
+.custom-button3:hover,
+.custom-button4:hover,
+.custom-button5:hover,
+.custom-button6:hover,
+.custom-button7:hover,
+.custom-button8:hover {
+  transform: scale(1.1); /* Ajusta el factor de escala según tu preferencia */
+}

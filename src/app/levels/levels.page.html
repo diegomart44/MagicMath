@@ -1,0 +1,47 @@
+<ion-content class="ion-padding" fullscreen>
+  <div class="background-container ion-text-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" offset="3">
+          <button #boton1 routerLink="/levels/a/" class="custom-button1">
+            <img src="assets/difi/1ro.png" alt="">
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="4">
+          <button #boton2 routerLink="/levels/b/" class="custom-button2">
+            <img src="assets/difi/2do.png" alt="">
+          </button>
+        </ion-col>
+        
+        <ion-col size="4">
+          <button #boton3 routerLink="/levels/c/" class="custom-button3">
+            <img src="assets/difi/3ro.png" alt="">
+          </button>
+        </ion-col>
+        
+      </ion-row>
+
+
+      <!-- ... Agrega más filas y columnas según tus necesidades ... -->
+
+    </ion-grid>
+    <style>
+      ion-content {
+        --background: transparent;
+      }
+    
+      .background-container {
+        background: url('../assets/fondo/grado.gif') no-repeat center center;
+        background-size: contain; /* Cambiado de "cover" a "contain" */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+     
+      }
+      
+    </style> 

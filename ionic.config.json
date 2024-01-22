@@ -1,0 +1,7 @@
+{
+  "name": "MagicMathh",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

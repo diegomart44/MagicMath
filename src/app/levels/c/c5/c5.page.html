@@ -1,0 +1,76 @@
+<ion-content class="ion-padding" fullscreen>
+  <div class="background-container ion-text-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" offset="3">
+          <button #botonSiguiente routerLink="/levels/c/c6/" class="custom-button1" [disabled]="!siguienteHabilitado">
+            <img src="assets/icon/siguiente.png" alt="">
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="4">
+          <button #boton1 class="custom-button2" (click)="mostrarMensajeIncorrecto()">
+            <img src="assets/icon/5.png" alt="">
+          </button>
+        </ion-col>
+        <ion-col size="4">
+          <button #boton2 class="custom-button3" (click)="habilitarSiguiente()">
+            <img src="assets/icon/6.png" alt="">
+          </button>
+        </ion-col>
+
+        <ion-col size="4">
+          <button #boton3 class="custom-button4" (click)="mostrarMensajeIncorrecto()">
+            <img src="assets/icon/3.png" alt="">
+          </button>
+        </ion-col>
+        <ion-col size="4">
+          <button #boton4 class="custom-button5" disabled>
+            <img src="assets/icon/2x3.png" alt="">
+          </button>
+        </ion-col>
+        <ion-col size="4">
+          <button #boton5 routerLink="/levels/" class="custom-button6" >
+            <img src="assets/icon/x.png" alt="">
+            </button>
+        </ion-col>
+
+      </ion-row>
+     
+  
+    </ion-grid>
+
+    <!-- Mensajes -->
+    <div *ngIf="mensajeMostrado" class="mensaje-correcto">
+      <img src="assets/icon/correcto.png" alt="">
+    </div>
+
+    <div *ngIf="mensajeIncorrecto" class="mensaje-incorrecto">
+      <img src="assets/icon/incorrecto.png" alt="">
+    </div>
+  </div>
+</ion-content>
+
+
+
+
+      
+      <style>
+        ion-content {
+          --background: transparent;
+        }
+      
+        .background-container {
+          background: url('../assets/fondo/multiplicación.gif') no-repeat center center;
+          background-size: contain; /* Cambiado de "cover" a "contain" */
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          min-height: 100%;
+       
+        }
+        
+      </style> 

@@ -1,0 +1,74 @@
+<ion-content class="ion-padding" fullscreen>
+  <div class="background-container ion-text-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10" offset="3">
+          <button #boton1 routerLink="/levels/a/a1/" class="custom-button1" >
+            <img src="assets/icon/1a.png" alt="">
+          </button>
+        </ion-col>
+     
+        <ion-col size="10" offset="3">
+          <button #boton2 routerLink="/levels/a/a2/" class="custom-button2" >
+            <img src="assets/icon/2a.png" alt="">
+          </button>
+        </ion-col>
+  >
+        <ion-col size="10" offset="3">
+          <button #boton3 routerLink="/levels/a/a3/" class="custom-button3" >
+            <img src="assets/icon/3a.png" alt="">
+          </button>
+        </ion-col>
+      
+        <ion-col size="10" offset="3">
+          <button #boton4 routerLink="/levels/a/a4/" class="custom-button4" >
+            <img src="assets/icon/4a.png" alt="">
+          </button>
+        </ion-col>
+      
+        <ion-col size="10" offset="3">
+          <button #boton5 routerLink="/levels/a/a5/" class="custom-button5" >
+            <img src="assets/icon/5a.png" alt="">
+          </button>
+        </ion-col>
+      </ion-row>
+
+
+
+
+
+      <!-- ... Agrega más filas y columnas según tus necesidades ... -->
+
+    </ion-grid>
+
+    <!-- Mensajes -->
+    <div *ngIf="mensajeMostrado" class="mensaje-correcto">
+      <img src="assets/icon/correcto.png" alt="">
+    </div>
+
+    <div *ngIf="mensajeIncorrecto" class="mensaje-incorrecto">
+      <img src="assets/icon/incorrecto.png" alt="">
+    </div>
+  </div>
+</ion-content>
+
+
+
+      
+      <style>
+        ion-content {
+          --background: transparent;
+        }
+      
+        .background-container {
+          background: url('../assets/fondo/selecciondenivel.gif') no-repeat center center;
+          background-size: contain; /* Cambiado de "cover" a "contain" */
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          min-height: 100%;
+       
+        }
+        
+      </style> 

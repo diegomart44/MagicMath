@@ -1,0 +1,89 @@
+ion-content {
+  --background: transparent;
+}
+
+.background-container {
+
+  
+    background-size: cover; /* Cambiado de "contain" a "cover" para ocupar toda la pantalla */
+    display: flex;
+    flex-direction: row; /* Cambiado de "horizontal" a "row" */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Cambiado de "%" a "vh" para que ocupe el 100% de la altura de la pantalla */
+  }
+
+.custom-button1 img {
+  width: 20%; /* ajusta el porcentaje según tu preferencia */
+  height: auto; /* para mantener la proporción original */
+}
+
+.custom-button1 {
+ 
+  background: transparent;
+  position: relative;
+  left: -40%;
+  top: 170%;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+.custom-button2 img {
+  width: 20%; /* ajusta el porcentaje según tu preferencia */
+  height: auto; /* para mantener la proporción original */
+}
+
+.custom-button2 {
+
+  background: transparent;
+  position: relative;
+  left:-40%;
+  top:270%;
+  z-index: 9;
+}
+
+.custom-button3 img {
+  width: 20%; /* ajusta el porcentaje según tu preferencia */
+  height: auto; /* para mantener la proporción original */
+}
+
+.custom-button3 {
+
+  background: transparent;
+  position: relative;
+  left: -15%;
+  top: -90%;
+  z-index: 966;
+}
+
+
+.custom-button4 img {
+  width: 20%; /* ajusta el porcentaje según tu preferencia */
+  height: auto; /* para mantener la proporción original */
+}
+
+.custom-button4 {
+
+  background: transparent;
+  position: relative;
+  left: -15%;
+  top: 0%;
+    z-index: 99;
+}
+
+.custom-button5 img {
+  width: 20%; /* ajusta el porcentaje según tu preferencia */
+  height: auto; /* para mantener la proporción original */
+}
+
+.custom-button5 {
+
+  background: transparent;
+  position: relative;
+  left:10%;
+  top: -330%;
+  z-index: 9;
+}
+
+
+
