@@ -1,0 +1,25 @@
+/* header.component.scss */
+:host ion-header {
+    ion-toolbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      --ion-background-color: var(--header-background-color);
+      --ion-color-base: var(--header-text-color);
+      border-radius: 20px;
+      width: 80%;
+  
+      ion-title {
+        font-size: 1.2em;
+        margin: 0;
+      }
+  
+      ion-buttons {
+        ion-button {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+  

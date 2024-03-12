@@ -1,0 +1,16 @@
+<!-- header.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ isAuthenticated ? '' + userEmail : '' }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ng-container *ngIf="isAuthenticated; else loginButton">
+        <ion-button (click)="logout()">Cerrar Sesión</ion-button>
+      </ng-container>
+      <ng-template #loginButton>
+        <ion-button routerLink="/login">Iniciar Sesión</ion-button>
+      </ng-template>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
