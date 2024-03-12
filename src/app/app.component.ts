@@ -16,9 +16,10 @@ export class AppComponent implements OnInit {
     // Escucha los eventos de navegación para determinar cuándo ocultar el encabezado
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        // Oculta el encabezado en la página de inicio de sesión (login)
-        this.showHeader = event.url !== '/login';
+        // Verifica si la ruta actual es una de las rutas que deseas ocultar
+        this.showHeader = !['/login', '/signup', '/login-docente', '/signup-docente'].includes(event.url);
       }
     });
   }
 }
+

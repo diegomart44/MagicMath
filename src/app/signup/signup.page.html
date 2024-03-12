@@ -1,17 +1,14 @@
 <ion-content>
   <div class="login-section ion-padding">
     <div class="heading ion-padding">
-      <h1>MATEMAPP</h1>
+      <h1>MAGICMATH</h1>
       <p>Registrarse</p>
     </div>
 
     <div class="login-form ion-padding">
-      
-
       <div class="form-input">
         <ion-icon name="mail-outline"></ion-icon>
         <ion-item>
-
           <ion-label position="floating">Usuario</ion-label>
           <ion-input [(ngModel)]="usuario" type="text"></ion-input>
         </ion-item>
@@ -21,14 +18,29 @@
         <ion-icon name="lock-closed-outline"></ion-icon>
         <ion-item>
           <ion-label position="floating">Curso/grado</ion-label>
-          <ion-input [(ngModel)]="cursoGrado" type="text"></ion-input>
+          <ion-select [(ngModel)]="cursoGrado">
+            <ion-select-option value="1">Primero</ion-select-option>
+            <ion-select-option value="2">Segundo</ion-select-option>
+            <ion-select-option value="3">Tercero</ion-select-option>
+          </ion-select>
         </ion-item>
       </div>
 
       <div class="form-input">
         <ion-icon name="lock-closed-outline"></ion-icon>
         <ion-item>
-          <ion-label position="floating">password</ion-label>
+          <ion-label position="floating">Turno</ion-label>
+          <ion-select [(ngModel)]="cursoGrado">
+            <ion-select-option value="1">Mañana</ion-select-option>
+            <ion-select-option value="2">Tarde</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="form-input">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
           <ion-input [(ngModel)]="password" type="password"></ion-input>
         </ion-item>
       </div>
@@ -37,7 +49,7 @@
     <div class="action-buttons ion-padding">
       <ion-button size="large" (click)="registrarUsuario()">REGISTRARSE</ion-button>
       <a class="elementor-lost-password" href="https://buscadoresflamencos.com/mi-cuenta/lost-password/">
-        ¿Olvidó su password?</a>
+        ¿Olvidó su contraseña?</a>
       <ion-button class="signup-button" size="large" fill="outline" routerLink="/login">YA TENGO UNA CUENTA</ion-button>
       <ion-button size="large" routerLink="/login" class="login-button-docente">ACCEDER COMO DOCENTE</ion-button>
     </div>

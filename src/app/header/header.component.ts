@@ -1,4 +1,3 @@
-// header.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -12,6 +11,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
   userEmail: string = '';
+  showHeader: boolean = true;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) {}
 

@@ -21,9 +21,8 @@
       <ion-label>Curso</ion-label>
       <ion-select placeholder="Seleccionar Curso" [(ngModel)]="selectedCurso">
         <!-- Opciones para los cursos -->
-        <ion-select-option value="curso1">Primero</ion-select-option>
-        <ion-select-option value="curso2">Segundo</ion-select-option>
-        <ion-select-option value="curso3">Tercero</ion-select-option>
+        <ion-select-option value="curso1">Curso 1</ion-select-option>
+        <ion-select-option value="curso2">Curso 2</ion-select-option>
         <!-- Agrega más opciones según tus necesidades -->
       </ion-select>
     </ion-item>
@@ -34,16 +33,11 @@
     <ion-button expand="full" (click)="cargarResultados()">Cargar Resultados</ion-button>
   </ion-list>
 
-<!-- Lista de resultados -->
-<ion-list *ngIf="resultados$ | async as resultados; else loading">
-  <ion-item *ngFor="let resultado of resultados">
-    <ion-label>{{ resultado.alumno }}</ion-label>
-    <ion-badge slot="end">{{ resultado.calificacion }}</ion-badge>
-  </ion-item>
-</ion-list>
-
-<ng-template #loading>
-  <!-- Mostrar un indicador de carga aquí si es necesario -->
-</ng-template>
-
-
+  <!-- Lista de resultados -->
+  <ion-list *ngIf="resultados$.length > 0">
+    <ion-item *ngFor="let resultado of resultados$ | async">
+      <ion-label>{{ resultado.alumno }}</ion-label>
+      <ion-badge slot="end">{{ resultado.calificacion }}</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>
