@@ -1,13 +1,62 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>docente</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Administrar Resultados</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">docente</ion-title>
+      <ion-title size="large">Administrar Resultados</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Curso</ion-label>
+      <ion-select placeholder="Seleccionar Curso" [(ngModel)]="selectedCurso">
+        <ion-select-option value="1">Primero</ion-select-option>
+        <ion-select-option value="2">Segundo</ion-select-option>
+        <ion-select-option value="3">Tercero</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nombre del Alumno</ion-label>
+      <ion-input type="text" [(ngModel)]="searchTerm"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Turno</ion-label>
+      <ion-select placeholder="Seleccionar Turno" [(ngModel)]="selectedTurno">
+        <ion-select-option value="1">Mañana</ion-select-option>
+        <ion-select-option value="2">Tarde</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="full" (click)="cargarResultados()">Buscar Alumnos</ion-button>
+  </ion-list>
+
+  <ion-list *ngIf="resultados$ | async as resultados; else loading">
+    <ion-list-header>
+      <ion-label>Nombre</ion-label>
+      <ion-label>Curso</ion-label>
+      <ion-label>Turno</ion-label>
+      <ion-label>Calificación</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let resultado of resultados">
+      <ion-label>{{ resultado.nombre }}</ion-label>
+      <ion-label>{{ resultado.cursoGrado === '1' ? 'Primero' : resultado.cursoGrado === '2' ? 'Segundo' : 'Tercero' }}</ion-label>
+      <ion-label>{{ resultado.turno === '1' ? 'Mañana' : 'Tarde' }}</ion-label>
+      <ion-badge slot="end">{{ resultado.calificacion }}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #loading>
+    <ion-spinner></ion-spinner> <!-- Indicador de carga -->
+  </ng-template>
 </ion-content>

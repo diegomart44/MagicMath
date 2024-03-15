@@ -1,15 +1,12 @@
 <ion-content class="ion-padding" fullscreen>
-
   <div class="background-container">
-  <div class="ion-text-center">
-    
-    <a id="botonComenzar" routerLink="/levels" class="custom-button">
-      <img src="assets/icon/play2.png" alt="">
-    </a>
+    <div class="ion-text-center">
+      <!-- Utiliza *ngIf para condicionar la ruta de redirección -->
+      <a id="botonComenzar" [routerLink]="redirectRoute" class="custom-button">
+        <img src="assets/icon/play2.png" alt="">
+      </a>
+    </div>
   </div>
-  </div>
-
-  
 </ion-content>
 
 <style>

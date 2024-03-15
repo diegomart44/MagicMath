@@ -1,6 +1,7 @@
 // signup.page.ts
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importa AngularFirestore
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -20,13 +21,22 @@ export class SignupDocentePage {
   password: string = '';
 
   
-  constructor(private afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService, private toastController: ToastController) {}
+  constructor(private afAuth: AngularFireAuth, 
+    private router: Router, 
+    private firestore: AngularFirestore, // Inyecta AngularFirestore
+    private toastr: ToastrService,
+     private toastController: ToastController) {}
 
   async registrarUsuario() {
     try {
       // Registra el usuario en Firebase Authentication
       const credenciales = await this.afAuth.createUserWithEmailAndPassword(this.usuario, this.password);
-  
+  if (credenciales.user) {
+      await this.firestore.collection('usuarios').doc(credenciales.user.uid).set({
+        cursoGrado: this.cursoGrado,
+        tipo: 'docente'
+        });
+      }
       // Muestra un Toast de éxito
       const toast = await this.toastController.create({
         message: `¡Bienvenido, ${this.usuario}! Registro exitoso`,

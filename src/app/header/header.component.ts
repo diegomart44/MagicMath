@@ -1,8 +1,12 @@
-// header.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importa AngularFirestore
 import { Router } from '@angular/router';
 
+interface UserData {
+  nombre: string;
+  // Puedes añadir otros campos si los tienes
+}
 
 @Component({
   selector: 'app-header',
@@ -11,14 +15,27 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
-  userEmail: string = '';
+  userName: string = ''; // Cambia userEmail a userName
+  showHeader: boolean = true;
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private firestore: AngularFirestore // Inyecta AngularFirestore
+  ) {}
 
   ngOnInit() {
     this.afAuth.authState.subscribe((user) => {
       this.isAuthenticated = !!user;
-      this.userEmail = user?.email || '';
+      if (user) {
+        // Si hay un usuario autenticado, busca su nombre en Firestore
+        this.firestore.collection('usuarios').doc(user.uid).get().subscribe((doc) => {
+          if (doc.exists) {
+            const userData = doc.data() as UserData; // Utiliza la interfaz UserData para definir el tipo de los datos
+            this.userName = userData.nombre;
+          }
+        });
+      }
     });
   }
 

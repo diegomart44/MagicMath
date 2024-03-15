@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importa AngularFirestore
 
 @Component({
   selector: 'app-a1',
@@ -11,12 +12,19 @@ export class A1Page implements OnInit, OnDestroy {
   siguienteHabilitado: boolean = false;
   mensajeMostrado: boolean = false;
   mensajeIncorrecto: boolean = false;
+  puntaje: number = 0; // Agrega una propiedad para el puntaje
 
   @ViewChild('botonSiguiente', { static: false, read: ElementRef }) botonSiguiente!: ElementRef;
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private firestore: AngularFirestore) { }
 
   ngOnInit() {
+    // Leer el progreso del usuario desde Firestore
+    this.firestore.collection('progreso').doc('ID_DEL_USUARIO').valueChanges().subscribe((data: any) => {
+      // Actualizar el progreso del usuario
+      this.siguienteHabilitado = data.nivelCompletado;
+      this.puntaje = data.puntaje; // Actualizar el puntaje del usuario
+    });
   }
 
   ionViewDidEnter() {
@@ -64,23 +72,29 @@ export class A1Page implements OnInit, OnDestroy {
     this.botonSiguiente.nativeElement.removeAttribute('disabled');
     this.mostrarMensajeCorrecto();
 
-     // Crear una instancia de Audio
-     const audio = new Audio();
+    // Crear una instancia de Audio
+    const audio = new Audio();
 
-     // Cargar y reproducir el archivo MP3
-     audio.src = 'assets/audio/aplausos.mp3';
-     audio.play();
- 
-     // Detener la reproducción después de 2 segundos
-     setTimeout(() => {
-       audio.pause();
-     }, 2000);
-     // Detener la reproducción después de 2 segundos
-     setTimeout(() => {
-       if (this.sonidoFondo) {
-         this.sonidoFondo.pause();
-       }
-     }, 2000);
+    // Cargar y reproducir el archivo MP3
+    audio.src = 'assets/audio/aplausos.mp3';
+    audio.play();
+
+    // Detener la reproducción después de 2 segundos
+    setTimeout(() => {
+      audio.pause();
+    }, 2000);
+    // Detener la reproducción después de 2 segundos
+    setTimeout(() => {
+      if (this.sonidoFondo) {
+        this.sonidoFondo.pause();
+      }
+    }, 2000);
+
+    // Actualizar el progreso del usuario en Firestore
+    this.firestore.collection('progreso').doc('ID_DEL_USUARIO').update({
+      nivelCompletado: true,
+      puntaje: this.puntaje + 5 // Incrementar el puntaje en 5
+    });
   }
 
   mostrarMensajeCorrecto() {

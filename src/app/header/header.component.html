@@ -1,10 +1,11 @@
-<!-- header.component.html -->
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      {{ isAuthenticated ? '' + userEmail : '' }}
+      <!-- Verifica si el usuario está autenticado y muestra su nombre si está disponible -->
+      {{ isAuthenticated ? '' + userName : 'Bienvenido' }}
     </ion-title>
     <ion-buttons slot="end">
+      <!-- Si el usuario está autenticado, muestra el botón de cerrar sesión, de lo contrario, muestra el botón de iniciar sesión -->
       <ng-container *ngIf="isAuthenticated; else loginButton">
         <ion-button (click)="logout()">Cerrar Sesión</ion-button>
       </ng-container>

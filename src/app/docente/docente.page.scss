@@ -1,0 +1,52 @@
+/* Estilos para el encabezado */
+ion-toolbar {
+    --background: #333; /* Color de fondo del encabezado */
+    --color: #fff; /* Color del texto del encabezado */
+  }
+  
+  /* Estilos para el título */
+  ion-title {
+    font-size: 1.4rem; /* Tamaño del título */
+    font-weight: bold; /* Negrita */
+  }
+  
+  /* Estilos para los elementos de la lista */
+  ion-label {
+    font-size: 1rem; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+  }
+  
+  ion-item {
+    padding: 1rem; /* Espaciado uniforme */
+  }
+  
+  /* Estilos para el botón */
+  ion-button {
+    --background: #27ae60; /* Color de fondo del botón */
+    --color: #fff; /* Color del texto del botón */
+    --border-radius: 0.8rem; /* Radio de borde */
+    font-size: 1rem; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    margin-top: 1.5rem; /* Margen superior */
+  }
+  
+  /* Estilos para los elementos de la lista de resultados */
+  ion-list-header {
+    --background: #000000; /* Color de fondo de los encabezados de la lista */
+    --color: #ffffff; /* Color del texto de los encabezados de la lista */
+    font-size: 1rem; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    padding: 0.8rem 1rem; /* Espaciado */
+    border-bottom: 1px solid #666; /* Borde inferior */
+    text-align: center; /* Alinear texto al centro */
+  }
+  
+  ion-item {
+    --background: transparent; /* Fondo transparente de los elementos de la lista */
+  }
+  
+  ion-badge {
+    font-size: 1rem; /* Tamaño del texto */
+    margin-left: auto; /* Mover al extremo derecho */
+  }
+  
