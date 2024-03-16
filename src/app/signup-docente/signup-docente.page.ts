@@ -21,22 +21,27 @@ export class SignupDocentePage {
   password: string = '';
 
   
-  constructor(private afAuth: AngularFireAuth, 
-    private router: Router, 
-    private firestore: AngularFirestore, // Inyecta AngularFirestore
-    private toastr: ToastrService,
-     private toastController: ToastController) {}
+  constructor(private afAuth: AngularFireAuth,
+     private router: Router,
+      private toastr: ToastrService, 
+      private firestore: AngularFirestore, // Inyecta AngularFirestore
+      private toastController: ToastController) {}
 
   async registrarUsuario() {
     try {
       // Registra el usuario en Firebase Authentication
       const credenciales = await this.afAuth.createUserWithEmailAndPassword(this.usuario, this.password);
-  if (credenciales.user) {
-      await this.firestore.collection('usuarios').doc(credenciales.user.uid).set({
-        cursoGrado: this.cursoGrado,
-        tipo: 'docente'
-        });
-      }
+  
+      if (credenciales.user) {
+        // Guarda el curso, turno y tipo (con valor predeterminado "estudiante") en Firestore
+        await this.firestore.collection('usuarios').doc(credenciales.user.uid).set({
+          cursoGrado: this.cursoGrado,
+ 
+          tipo: 'docente',
+          nombre: 'docente',
+         
+          });
+        }
       // Muestra un Toast de éxito
       const toast = await this.toastController.create({
         message: `¡Bienvenido, ${this.usuario}! Registro exitoso`,
