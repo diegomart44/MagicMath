@@ -13,9 +13,12 @@ import { ToastController } from '@ionic/angular';
 export class SignupPage {
   usuario: string = '';
   nombre: string = '';
+  calificacion: number = 0; // Inicializa la variable con un valor numérico
   cursoGrado: string = '';
   turno: string = '';
   password: string = '';
+
+
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -40,7 +43,8 @@ export class SignupPage {
         cursoGrado: this.cursoGrado,
         turno: this.turno,
         tipo: 'estudiante',
-        nombre: this.nombre
+        nombre: this.nombre,
+        calificacion: this.calificacion,
         });
         
 

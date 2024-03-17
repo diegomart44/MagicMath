@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importa AngularFirestore
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Subscription } from 'rxjs';
+import { UserIdService } from '../../../services/user-id.service';
+
 
 @Component({
   selector: 'app-a1',
@@ -12,102 +15,81 @@ export class A1Page implements OnInit, OnDestroy {
   siguienteHabilitado: boolean = false;
   mensajeMostrado: boolean = false;
   mensajeIncorrecto: boolean = false;
-  puntaje: number = 0; // Agrega una propiedad para el puntaje
+  puntaje: number = 0; 
+  private firestoreSubscription: Subscription | undefined;
 
   @ViewChild('botonSiguiente', { static: false, read: ElementRef }) botonSiguiente!: ElementRef;
 
-  constructor(private navCtrl: NavController, private firestore: AngularFirestore) { }
+  constructor(
+    private navCtrl: NavController, 
+    private firestore: AngularFirestore,
+    private userIdService: UserIdService
+  ) { }
 
   ngOnInit() {
-    // Leer el progreso del usuario desde Firestore
-    this.firestore.collection('progreso').doc('ID_DEL_USUARIO').valueChanges().subscribe((data: any) => {
-      // Actualizar el progreso del usuario
-      this.siguienteHabilitado = data.nivelCompletado;
-      this.puntaje = data.puntaje; // Actualizar el puntaje del usuario
-    });
-  }
-
-  ionViewDidEnter() {
-    this.sonidoFondo = new Audio('assets/audio/audio4.mp3');
-    this.sonidoFondo.loop = true;
-
-    // Configurar el volumen inicial bajo
-    if (this.sonidoFondo) {
-      this.sonidoFondo.volume = 0.1;
-      this.sonidoFondo.play();
-      this.aumentarVolumenProgresivo();
-    }
-  }
-
-  aumentarVolumenProgresivo() {
-    // Aumentar el volumen progresivamente cada 500 milisegundos
-    const interval = setInterval(() => {
-      if (this.sonidoFondo && this.sonidoFondo.volume < 1.0) {
-        this.sonidoFondo.volume += 0.1; // Puedes ajustar el incremento según tus necesidades
-      } else {
-        clearInterval(interval);
+    this.userIdService.userId$.subscribe(userId => {
+      if (userId) {
+        this.initFirestoreSubscription(userId);
       }
-    }, 200);
-  }
-
-  ionViewWillLeave() {
-    if (this.sonidoFondo) {
-      this.sonidoFondo.pause();
-    }
+    });
   }
 
   ngOnDestroy() {
+    if (this.firestoreSubscription) {
+      this.firestoreSubscription.unsubscribe();
+    }
+
     if (this.sonidoFondo) {
       this.sonidoFondo.pause();
-      this.sonidoFondo = null;
     }
   }
 
-  selectLevel(level: string) {
-    this.navCtrl.navigateForward(`/level/${level}`);
-  }
-
-  habilitarSiguiente() {
-    this.siguienteHabilitado = true;
-    this.botonSiguiente.nativeElement.removeAttribute('disabled');
-    this.mostrarMensajeCorrecto();
-
-    // Crear una instancia de Audio
-    const audio = new Audio();
-
-    // Cargar y reproducir el archivo MP3
-    audio.src = 'assets/audio/aplausos.mp3';
-    audio.play();
-
-    // Detener la reproducción después de 2 segundos
-    setTimeout(() => {
-      audio.pause();
-    }, 2000);
-    // Detener la reproducción después de 2 segundos
-    setTimeout(() => {
-      if (this.sonidoFondo) {
-        this.sonidoFondo.pause();
-      }
-    }, 2000);
-
-    // Actualizar el progreso del usuario en Firestore
-    this.firestore.collection('progreso').doc('ID_DEL_USUARIO').update({
-      nivelCompletado: true,
-      puntaje: this.puntaje + 5 // Incrementar el puntaje en 5
+  private initFirestoreSubscription(userId: string) {
+    this.firestoreSubscription = this.firestore.collection('progreso').doc(userId).valueChanges().subscribe((data: any) => {
+      this.siguienteHabilitado = data.nivelCompletado;
+      this.puntaje = data.puntaje; 
     });
   }
 
-  mostrarMensajeCorrecto() {
-    this.mensajeMostrado = true;
-    setTimeout(() => {
-      this.mensajeMostrado = false;
-    }, 2000);
+  habilitarSiguiente() {
+    // Habilita el botón siguiente
+    this.siguienteHabilitado = true;
+    this.botonSiguiente.nativeElement.removeAttribute('disabled');
+    
+    // Muestra el mensaje correcto
+    this.mostrarMensaje('correcto');
+
+    // Suma 5 puntos al puntaje local
+    this.puntaje += 5;
+
+    // Actualiza el puntaje en Firestore
+    const userId = this.userIdService.getUserId();
+    if (userId) {
+      this.updateScoreInFirestore(userId);
+    }
   }
 
-  mostrarMensajeIncorrecto() {
-    this.mensajeIncorrecto = true;
-    setTimeout(() => {
-      this.mensajeIncorrecto = false;
-    }, 2000);
+  private updateScoreInFirestore(userId: string) {
+    this.firestore.collection('usuarios').doc(userId).update({
+      calificacion: this.puntaje
+    }).then(() => {
+      console.log('Puntaje actualizado en Firestore correctamente.');
+    }).catch(error => {
+      console.error('Error al actualizar el puntaje en Firestore:', error);
+    });
+  }
+
+  mostrarMensaje(tipo: string) {
+    if (tipo === 'correcto') {
+      this.mensajeMostrado = true;
+      setTimeout(() => {
+        this.mensajeMostrado = false;
+      }, 2000);
+    } else if (tipo === 'incorrecto') {
+      this.mensajeIncorrecto = true;
+      setTimeout(() => {
+        this.mensajeIncorrecto = false;
+      }, 2000);
+    }
   }
 }

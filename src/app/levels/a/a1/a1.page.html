@@ -3,7 +3,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6" offset="3">
-          <button #botonSiguiente routerLink="/levels/a/a2/" class="custom-button1" [disabled]="!siguienteHabilitado">
+          <button #botonSiguiente routerLink="/levels/a/a2/" class="custom-button1" [disabled]="!siguienteHabilitado" (click)="habilitarSiguiente()">
             <img src="assets/icon/siguiente.png" alt="">
           </button>
         </ion-col>
@@ -11,12 +11,12 @@
 
       <ion-row>
         <ion-col size="4">
-          <button #boton1 class="custom-button2" (click)="mostrarMensajeIncorrecto()">
+          <button #boton1 class="custom-button2" (click)="mostrarMensaje('incorrecto')">
             <img src="assets/icon/4.png" alt="">
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton2 class="custom-button3" (click)="mostrarMensajeIncorrecto()">
+          <button #boton2 class="custom-button3" (click)="mostrarMensaje('incorrecto')">
             <img src="assets/icon/3.png" alt="">
           </button>
         </ion-col>
@@ -27,36 +27,31 @@
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton4 class="custom-button5" (click)="mostrarMensajeIncorrecto()">
+          <button #boton4 class="custom-button5" (click)="mostrarMensaje('incorrecto')">
             <img src="assets/icon/8.png" alt="">
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton5 class="custom-button6" (click)="mostrarMensajeIncorrecto()">
+          <button #boton5 class="custom-button6" (click)="mostrarMensaje('incorrecto')">
             <img src="assets/icon/5.png" alt="">
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton6 class="custom-button7" (click)="mostrarMensajeIncorrecto()">
+          <button #boton6 class="custom-button7" (click)="mostrarMensaje('incorrecto')">
             <img src="assets/icon/6.png" alt="">
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton7 class="custom-button8" (click)="mostrarMensajeIncorrecto()">
+          <button #boton7 class="custom-button8" (click)="mostrarMensaje('incorrecto')">
             <img src="assets/icon/2.png" alt="">
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton9 routerLink="/levels/a/" class="custom-button9" >
+          <button #boton9 routerLink="/levels/a/" class="custom-button9">
             <img src="assets/icon/x.png" alt="">
-            </button>
+          </button>
         </ion-col>
-
       </ion-row>
-
-
-      <!-- ... Agrega más filas y columnas según tus necesidades ... -->
-
     </ion-grid>
 
     <!-- Mensajes -->
@@ -70,24 +65,18 @@
   </div>
 </ion-content>
 
+<style>
+  ion-content {
+    --background: transparent;
+  }
 
-
-
-      
-      <style>
-        ion-content {
-          --background: transparent;
-        }
-      
-        .background-container {
-          background: url('../assets/fondo/fondoa1.gif') no-repeat center center;
-          background-size: contain; /* Cambiado de "cover" a "contain" */
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          min-height: 100%;
-       
-        }
-        
-      </style> 
+  .background-container {
+    background: url('../assets/fondo/fondoa1.gif') no-repeat center center;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+  }
+</style>
