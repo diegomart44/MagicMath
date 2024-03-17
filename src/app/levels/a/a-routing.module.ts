@@ -27,6 +27,14 @@ const routes: Routes = [
   {
     path: 'a5',
     loadChildren: () => import('./a5/a5.module').then( m => m.A5PageModule)
+  },
+  {
+    path: 'afin',
+    loadChildren: () => import('./afin/afin.module').then( m => m.AfinPageModule)
+  },
+  {
+    path: 'aplay',
+    loadChildren: () => import('./aplay/aplay.module').then( m => m.AplayPageModule)
   }
 ];
 

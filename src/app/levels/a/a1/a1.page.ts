@@ -52,22 +52,26 @@ export class A1Page implements OnInit, OnDestroy {
   }
 
   habilitarSiguiente() {
-    // Habilita el botón siguiente
-    this.siguienteHabilitado = true;
-    this.botonSiguiente.nativeElement.removeAttribute('disabled');
-    
-    // Muestra el mensaje correcto
-    this.mostrarMensaje('correcto');
-
-    // Suma 5 puntos al puntaje local
-    this.puntaje += 5;
-
-    // Actualiza el puntaje en Firestore
-    const userId = this.userIdService.getUserId();
-    if (userId) {
-      this.updateScoreInFirestore(userId);
+    // Verifica si el botón siguiente ya está habilitado
+    if (!this.siguienteHabilitado) {
+      // Habilita el botón siguiente
+      this.siguienteHabilitado = true;
+      this.botonSiguiente.nativeElement.removeAttribute('disabled');
+  
+      // Muestra el mensaje correcto
+      this.mostrarMensaje('correcto');
+  
+      // Suma 10 puntos al puntaje local solo si no se ha habilitado el botón siguiente previamente
+      this.puntaje += 10;
+  
+      // Actualiza el puntaje en Firestore
+      const userId = this.userIdService.getUserId();
+      if (userId) {
+        this.updateScoreInFirestore(userId);
+      }
     }
   }
+  
 
   private updateScoreInFirestore(userId: string) {
     this.firestore.collection('usuarios').doc(userId).update({

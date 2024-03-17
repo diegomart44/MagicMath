@@ -27,7 +27,7 @@
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton4 class="custom-button5" (click)= "mostrarMensajeIncorrecto()">
+          <button #boton4 class="custom-button5" (click)="mostrarMensajeIncorrecto()">
             <img src="assets/icon/8.png" alt="">
           </button>
         </ion-col>
@@ -47,19 +47,11 @@
           </button>
         </ion-col>
         <ion-col size="4">
-          <button #boton9 routerLink="/levels/" class="custom-button9" >
+          <button #boton9 routerLink="/levels/" class="custom-button9">
             <img src="assets/icon/x.png" alt="">
-            </button>
+          </button>
         </ion-col>
-        
-
-        
-        
       </ion-row>
-
-
-      <!-- ... Agrega más filas y columnas según tus necesidades ... -->
-
     </ion-grid>
 
     <!-- Mensajes -->
@@ -73,24 +65,18 @@
   </div>
 </ion-content>
 
+<style>
+  ion-content {
+    --background: transparent;
+  }
 
-
-
-      
-      <style>
-        ion-content {
-          --background: transparent;
-        }
-      
-        .background-container {
-          background: url('../assets/fondo/seleccionaelnumerodos.gif') no-repeat center center;
-          background-size: contain; /* Cambiado de "cover" a "contain" */
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          min-height: 100%;
-       
-        }
-        
-      </style> 
+  .background-container {
+    background: url('../assets/fondo/seleccionaelnumerodos.gif') no-repeat center center;
+    background-size: contain; /* Cambiado de "cover" a "contain" */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+  }
+</style>

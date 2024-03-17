@@ -1,0 +1,27 @@
+<ion-content class="ion-padding" fullscreen>
+  <div class="background-container">
+    <div class="ion-text-center">
+      <!-- Utiliza *ngIf para condicionar la ruta de redirección -->
+      <a id="botonComenzar" [routerLink]="redirectRoute" class="custom-button">
+        <img src="assets/icon/playgame.png" alt="">
+      </a>
+    </div>
+  </div>
+</ion-content>
+
+<style>
+  ion-content {
+    --background: transparent;
+  }
+
+  .background-container {
+    background: url('../assets/fin.gif') no-repeat center center;
+    background-size: contain; /* Cambiado de "cover" a "contain" */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+</style>

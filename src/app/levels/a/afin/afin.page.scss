@@ -1,0 +1,27 @@
+.app-logo {
+    width: 15%;
+    height: auto;
+    margin-bottom: 20%;
+  }
+  
+  .custom-button {
+    display: inline-block;
+    padding: 10%;
+    border-radius: 20%;
+    background-color: transparent;
+    box-shadow: 0 4% 8% rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 450px; /* Modificar este valor para ajustar la posición hacia abajo */
+  }
+  
+  .custom-button img {
+    width: 100%; /* Ajustar el tamaño de la imagen al tamaño del enlace */
+    border-radius: 20%; /* Misma esquina redondeada que el enlace */
+  }
+  
+  .custom-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6% 12% rgba(0, 0, 0, 0.3);
+  }
+  
+  
