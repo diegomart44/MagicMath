@@ -51,7 +51,7 @@ export class SignupPage {
         // Redirige al usuario a la ventana correspondiente
         switch (this.cursoGrado) {
           case '1':
-            this.router.navigate(['/levels/a']);
+            this.router.navigate(['/levels/a/aplay']);
             break;
           case '2':
             this.router.navigate(['/levels/b']);

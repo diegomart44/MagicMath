@@ -1,0 +1,11 @@
+{
+  "appId": "pilzsofts.web.app",
+  "appName": "magicmath",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

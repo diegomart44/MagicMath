@@ -7,18 +7,19 @@ ion-content {
 
 .login-section {
     width: 90%;
-    max-width: 500px;
-    background: rgba(44, 44, 44, 0.651); /* Ajusta la transparencia como prefieras */
-    position: absolute; /* Posición absoluta con respecto a ion-content */
-    left: 50%; /* Centrar horizontalmente */
-    transform: translateX(-50%); /* Centrado horizontal */
-    bottom: 10vh; /* Ajusta este valor para que emerja desde la parte inferior de la pantalla */
+    max-width: 90%; /* Modificado para ajustarse a dispositivos móviles */
+    background: rgba(44, 44, 44, 0.651);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5vh; /* Ajustado para bajar más el formulario */
+    top: 5vh; /* Ajustado para bajar más el formulario */
     border-top-left-radius: 46px;
     border-top-right-radius: 46px;
     overflow-y: auto;
     padding-bottom: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra para profundidad */
-    transition: bottom 0.3s; /* Transición suave para la animación */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: bottom 0.3s;
 }
 .login-section .heading {
     margin-top: 20px;
