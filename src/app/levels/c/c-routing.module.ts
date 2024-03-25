@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'c5',
     loadChildren: () => import('./c5/c5.module').then( m => m.C5PageModule)
+  },
+  {
+    path: 'cplay',
+    loadChildren: () => import('./cplay/cplay.module').then( m => m.CplayPageModule)
   }
 ];
 

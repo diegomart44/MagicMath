@@ -17,4 +17,8 @@ export class UserIdService {
   getUserId(): string | null {
     return this.userIdSubject.getValue();
   }
+
+  clearUserId() {
+    this.userIdSubject.next(null);
+  }
 }

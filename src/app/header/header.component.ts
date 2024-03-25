@@ -42,6 +42,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.userIdService.clearUserId(); // Clear the user ID when logging out
     this.afAuth.signOut().then(() => {
       this.router.navigate(['/login']);
     });

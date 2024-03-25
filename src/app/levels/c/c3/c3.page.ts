@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UserIdService } from '../../../services/user-id.service';
 
 @Component({
   selector: 'app-c3',
@@ -11,35 +14,31 @@ export class C3Page implements OnInit, OnDestroy {
   siguienteHabilitado: boolean = false;
   mensajeMostrado: boolean = false;
   mensajeIncorrecto: boolean = false;
+  puntaje: number = 0;
+  private sonidoAplausos: HTMLAudioElement = new Audio('assets/audio/aplausos.mp3');
+  private firestoreSubscription: Subscription | undefined;
 
   @ViewChild('botonSiguiente', { static: false, read: ElementRef }) botonSiguiente!: ElementRef;
 
-  constructor(private navCtrl: NavController) { }
+  constructor(
+    private navCtrl: NavController,
+    private firestore: AngularFirestore,
+    private userIdService: UserIdService
+  ) { }
 
   ngOnInit() {
+    this.userIdService.userId$.subscribe(userId => {
+      if (userId) {
+        this.initFirestoreSubscription(userId);
+      }
+    });
   }
 
   ionViewDidEnter() {
     this.sonidoFondo = new Audio('assets/audio/audio4.mp3');
     this.sonidoFondo.loop = true;
-
-    // Configurar el volumen inicial bajo
-    if (this.sonidoFondo) {
-      this.sonidoFondo.volume = 0.1;
-      this.sonidoFondo.play();
-      this.aumentarVolumenProgresivo();
-    }
-  }
-
-  aumentarVolumenProgresivo() {
-    // Aumentar el volumen progresivamente cada 500 milisegundos
-    const interval = setInterval(() => {
-      if (this.sonidoFondo && this.sonidoFondo.volume < 1.0) {
-        this.sonidoFondo.volume += 0.1; // Puedes ajustar el incremento según tus necesidades
-      } else {
-        clearInterval(interval);
-      }
-    }, 200);
+    this.sonidoFondo.volume = 0.1;
+    this.sonidoFondo.play();
   }
 
   ionViewWillLeave() {
@@ -53,34 +52,54 @@ export class C3Page implements OnInit, OnDestroy {
       this.sonidoFondo.pause();
       this.sonidoFondo = null;
     }
+    if (this.firestoreSubscription) {
+      this.firestoreSubscription.unsubscribe();
+    }
   }
 
-  selectLevel(level: string) {
-    this.navCtrl.navigateForward(`/level/${level}`);
+  private initFirestoreSubscription(userId: string) {
+    this.firestoreSubscription = this.firestore.collection('progreso').doc(userId).valueChanges().subscribe((data: any) => {
+      this.siguienteHabilitado = data.nivelCompletado;
+      this.puntaje = data.puntaje;
+    });
   }
 
   habilitarSiguiente() {
-    this.siguienteHabilitado = true;
-    this.botonSiguiente.nativeElement.removeAttribute('disabled');
-    this.mostrarMensajeCorrecto();
+    if (!this.siguienteHabilitado) {
+      this.siguienteHabilitado = true;
+      this.botonSiguiente.nativeElement.removeAttribute('disabled');
+      this.mostrarMensajeCorrecto();
+      this.sonidoAplausos.play();
 
-    // Crear una instancia de Audio
-    const audio = new Audio();
+      // Suma 10 puntos al puntaje local
+      this.puntaje += 30;
 
-    // Cargar y reproducir el archivo MP3
-    audio.src = 'assets/audio/aplausos.mp3';
-    audio.play();
-
-    // Detener la reproducción después de 2 segundos
-    setTimeout(() => {
-      audio.pause();
-    }, 2000);
-    // Detener la reproducción después de 2 segundos
-    setTimeout(() => {
-      if (this.sonidoFondo) {
-        this.sonidoFondo.pause();
+      // Actualiza el puntaje en Firestore
+      const userId = this.userIdService.getUserId();
+      if (userId) {
+        this.updateScoreInFirestore(userId);
       }
-    }, 2000);
+
+      setTimeout(() => {
+        this.sonidoAplausos.pause();
+      }, 2000);
+
+      setTimeout(() => {
+        if (this.sonidoFondo) {
+          this.sonidoFondo.pause();
+        }
+      }, 2000);
+    }
+  }
+
+  private updateScoreInFirestore(userId: string) {
+    this.firestore.collection('usuarios').doc(userId).update({
+      calificacion: this.puntaje
+    }).then(() => {
+      console.log('Puntaje actualizado en Firestore correctamente.');
+    }).catch(error => {
+      console.error('Error al actualizar el puntaje en Firestore:', error);
+    });
   }
 
   mostrarMensajeCorrecto() {

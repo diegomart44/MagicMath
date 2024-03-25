@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importa AngularFirestore
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   user = {
     email: '',
     password: ''
@@ -19,10 +19,25 @@ export class LoginPage {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore, // Inyecta AngularFirestore
+    private firestore: AngularFirestore,
     private router: Router,
     private toastController: ToastController
   ) {}
+
+  ngOnInit() {
+    // Verificar si el usuario ya ha iniciado sesión al cargar la página
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        // Si el usuario ya está autenticado, obtén su documento de usuario de Firestore
+        this.firestore.collection('usuarios').doc(user.uid).get().subscribe(doc => {
+          if (doc.exists) {
+            const cursoGrado = doc.get('cursoGrado');
+            this.redirectToCorrectPage(cursoGrado);
+          }
+        });
+      }
+    });
+  }
 
   async login() {
     try {
@@ -32,35 +47,24 @@ export class LoginPage {
       // Consulta el curso del usuario en Firestore
       const userDoc = this.firestore.collection('usuarios').doc(credentials.user?.uid).get();
       userDoc.subscribe((doc) => {
-        const cursoGrado = doc.get('cursoGrado');
+        if (doc.exists) {
+          const cursoGrado = doc.get('cursoGrado');
 
-        // Guarda el ID del usuario en el localStorage o sessionStorage
-        if (credentials.user?.uid) {
-          localStorage.setItem('userId', credentials.user.uid);
-        }
+          // Guarda el ID del usuario en el localStorage si está disponible
+          if (credentials.user) {
+            localStorage.setItem('userId', credentials.user.uid);
+          }
 
-        // Muestra un Toast de éxito
-        const toast = this.toastController.create({
-          message: `¡Bienvenido, ${credentials.user?.email}! Sesión iniciada con éxito`,
-          duration: 3000,
-          position: 'top',
-        });
-        toast.then((toastInstance) => toastInstance.present());
+          // Muestra un Toast de éxito
+          const toast = this.toastController.create({
+            message: `¡Bienvenido, ${credentials.user?.email}! Sesión iniciada con éxito`,
+            duration: 3000,
+            position: 'top',
+          });
+          toast.then((toastInstance) => toastInstance.present());
 
-        // Redirige al usuario a la ventana correspondiente
-        switch (cursoGrado) {
-          case '1':
-            this.router.navigate(['/levels/a/aplay']);
-            break;
-          case '2':
-            this.router.navigate(['/levels/b']);
-            break;
-          case '3':
-            this.router.navigate(['/levels/c']);
-            break;
-          default:
-            this.router.navigate(['/home']); // Si no se selecciona ningún curso, redirige a la página home
-            break;
+          // Redirige al usuario a la ventana correspondiente
+          this.redirectToCorrectPage(cursoGrado);
         }
       });
     } catch (error) {
@@ -74,6 +78,24 @@ export class LoginPage {
         color: 'danger',
       });
       toast.then((toastInstance) => toastInstance.present());
+    }
+  }
+
+  redirectToCorrectPage(cursoGrado: string | undefined) {
+    // Redirige al usuario a la página correspondiente según su curso
+    switch (cursoGrado) {
+      case '1':
+        this.router.navigate(['/levels/a/aplay']);
+        break;
+      case '2':
+        this.router.navigate(['/levels/b/bplay']);
+        break;
+      case '3':
+        this.router.navigate(['/levels/c/cplay']);
+        break;
+      default:
+        this.router.navigate(['/home']); // Si no se selecciona ningún curso, redirige a la página home
+        break;
     }
   }
 }

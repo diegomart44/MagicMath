@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'b5',
     loadChildren: () => import('./b5/b5.module').then( m => m.B5PageModule)
+  },
+  {
+    path: 'bplay',
+    loadChildren: () => import('./bplay/bplay.module').then( m => m.BplayPageModule)
   }
 ];
 
