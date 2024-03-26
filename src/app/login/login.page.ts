@@ -32,7 +32,14 @@ export class LoginPage implements OnInit {
         this.firestore.collection('usuarios').doc(user.uid).get().subscribe(doc => {
           if (doc.exists) {
             const cursoGrado = doc.get('cursoGrado');
-            this.redirectToCorrectPage(cursoGrado);
+            const tipoUsuario = doc.get('tipo'); // Obtener el tipo de usuario
+
+            // Redirigir a la página correspondiente según el tipo de usuario
+            if (tipoUsuario === 'docente') {
+              this.router.navigate(['/docente']);
+            } else {
+              this.redirectToCorrectPage(cursoGrado);
+            }
           }
         });
       }
@@ -49,6 +56,7 @@ export class LoginPage implements OnInit {
       userDoc.subscribe((doc) => {
         if (doc.exists) {
           const cursoGrado = doc.get('cursoGrado');
+          const tipoUsuario = doc.get('tipo'); // Obtener el tipo de usuario
 
           // Guarda el ID del usuario en el localStorage si está disponible
           if (credentials.user) {
@@ -63,8 +71,12 @@ export class LoginPage implements OnInit {
           });
           toast.then((toastInstance) => toastInstance.present());
 
-          // Redirige al usuario a la ventana correspondiente
-          this.redirectToCorrectPage(cursoGrado);
+          // Redirige al usuario a la página correspondiente según su tipo de usuario
+          if (tipoUsuario === 'docente') {
+            this.router.navigate(['/docente']);
+          } else {
+            this.redirectToCorrectPage(cursoGrado);
+          }
         }
       });
     } catch (error) {

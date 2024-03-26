@@ -54,10 +54,10 @@ export class SignupPage {
             this.router.navigate(['/levels/a/aplay']);
             break;
           case '2':
-            this.router.navigate(['/levels/b']);
+            this.router.navigate(['/levels/bplay']);
             break;
           case '3':
-            this.router.navigate(['/levels/c']);
+            this.router.navigate(['/levels/cplay']);
             break;
           default:
             this.router.navigate(['/home']); // Si no se selecciona ningún curso, redirige a la página home

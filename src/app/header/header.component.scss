@@ -1,25 +1,25 @@
 /* header.component.scss */
 :host ion-header {
-    ion-toolbar {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      --ion-background-color: var(--header-background-color);
-      --ion-color-base: var(--header-text-color);
-      border-radius: 20px;
-      width: 80%;
-  
-      ion-title {
-        font-size: 1.2em;
-        margin: 0;
-      }
-  
-      ion-buttons {
-        ion-button {
-          font-size: 0.8em;
-        }
+  ion-toolbar {
+    position: fixed;
+    bottom: 0; /* Ajustar para enviar el encabezado a la parte inferior */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo translúcido */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra translúcida */
+    --ion-color-base: var(--header-text-color);
+    border-radius: 5px; /* Reducir el radio de borde aún más */
+    width: 20%; /* Reducir el ancho del encabezado aún más */
+
+    ion-title {
+      margin: 0;
+      color: var(--header-text-color);
+    }
+
+    ion-buttons {
+      ion-button {
+        font-size: 0.8em; /* Mantener el tamaño de la fuente original */
       }
     }
   }
-  
+}

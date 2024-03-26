@@ -12,18 +12,19 @@
         <ion-icon name="mail-outline"></ion-icon>
         <ion-item>
 
-          <ion-label position="floating">Usuario</ion-label>
+          <ion-label position="floating">Email</ion-label>
           <ion-input [(ngModel)]="usuario" type="text"></ion-input>
         </ion-item>
       </div>
 
       <div class="form-input">
-        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-icon name="mail-outline"></ion-icon>
         <ion-item>
-          <ion-label position="floating">Curso/grado</ion-label>
-          <ion-input [(ngModel)]="cursoGrado" type="text"></ion-input>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="nombre" type="text"></ion-input>
         </ion-item>
       </div>
+
 
       <div class="form-input">
         <ion-icon name="lock-closed-outline"></ion-icon>
@@ -39,7 +40,7 @@
       <a class="elementor-lost-password" href="https://buscadoresflamencos.com/mi-cuenta/lost-password/">
         ¿Olvidó su password?</a>
       <ion-button class="signup-button" size="large" fill="outline" routerLink="/login">YA TENGO UNA CUENTA</ion-button>
-      <ion-button size="large" class="login-button-docente">ACCEDER COMO DOCENTE</ion-button>
+
     </div>
   </div>
 </ion-content>

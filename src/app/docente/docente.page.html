@@ -27,6 +27,7 @@
       <ion-select placeholder="Seleccionar Turno" [(ngModel)]="selectedTurno">
         <ion-select-option value="1">Mañana</ion-select-option>
         <ion-select-option value="2">Tarde</ion-select-option>
+        <ion-select-option value="3">Doble escolaridad</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -44,9 +45,10 @@
     <ion-item *ngFor="let resultado of resultados">
       <ion-label>{{ resultado.nombre }}</ion-label>
       <ion-label>{{ resultado.cursoGrado === '1' ? 'Primero' : resultado.cursoGrado === '2' ? 'Segundo' : 'Tercero' }}</ion-label>
-      <ion-label>{{ resultado.turno === '1' ? 'Mañana' : 'Tarde' }}</ion-label>
+      <ion-label>{{ resultado.turno === '1' ? 'Mañana' : resultado.turno === '2' ? 'Tarde' : resultado.turno === '3' ? 'Doble Escolaridad' : 'Desconocido' }}</ion-label>
       <ion-badge slot="end">{{ resultado.calificacion }}</ion-badge>
     </ion-item>
+    
   </ion-list>
 
   <ng-template #loading>

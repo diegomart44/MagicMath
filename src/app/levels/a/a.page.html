@@ -1,4 +1,4 @@
-<ion-content class="ion-padding" fullscreen>
+<ion-content class="ion-padding" fullscreen scroll-y="false">
   <div class="background-container ion-text-center">
     <ion-grid>
       <ion-row>
@@ -32,13 +32,7 @@
           </button>
         </ion-col>
       </ion-row>
-
-
-
-
-
-      <!-- ... Agrega más filas y columnas según tus necesidades ... -->
-
+      <!-- Agrega más filas y columnas según tus necesidades -->
     </ion-grid>
 
     <!-- Mensajes -->
@@ -56,19 +50,22 @@
 
       
       <style>
-        ion-content {
-          --background: transparent;
-        }
-      
-        .background-container {
-          background: url('../assets/fondo/selecciondenivel.gif') no-repeat center center;
-          background-size: contain; /* Cambiado de "cover" a "contain" */
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          min-height: 100%;
-       
-        }
-        
+       ion-content {
+  --background: transparent;
+}
+
+.background-container {
+  background: url('../assets/fondo/selecciondenivel1.gif') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Cambiado a min-height: 100vh para ocupar toda la pantalla */
+}
+
+ion-content::-webkit-scrollbar {
+  display: none;
+}
+
       </style> 

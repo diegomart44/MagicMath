@@ -8,6 +8,7 @@ import { ToastController } from '@ionic/angular';
 
 
 
+
 @Component({
   selector: 'app-signup-docente',
   templateUrl: './signup-docente.page.html',
@@ -17,15 +18,18 @@ import { ToastController } from '@ionic/angular';
 export class SignupDocentePage {
 
   usuario: string = '';
+  nombre: string = '';
   cursoGrado: string = '';
   password: string = '';
 
   
-  constructor(private afAuth: AngularFireAuth,
-     private router: Router,
-      private toastr: ToastrService, 
-      private firestore: AngularFirestore, // Inyecta AngularFirestore
-      private toastController: ToastController) {}
+  constructor(
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore, // Inyecta AngularFirestore
+    private router: Router,
+    private toastr: ToastrService,
+    private toastController: ToastController
+      ) {}
 
   async registrarUsuario() {
     try {
@@ -38,7 +42,7 @@ export class SignupDocentePage {
           cursoGrado: this.cursoGrado,
  
           tipo: 'docente',
-          nombre: 'docente',
+          nombre: this.nombre,
          
           });
         }

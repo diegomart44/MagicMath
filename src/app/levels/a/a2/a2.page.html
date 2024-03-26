@@ -1,4 +1,4 @@
-<ion-content class="ion-padding" fullscreen>
+<ion-content class="ion-padding" fullscreen scroll-y="false">
   <div class="background-container ion-text-center">
     <ion-grid>
       <ion-row>
@@ -72,11 +72,15 @@
 
   .background-container {
     background: url('../assets/fondo/seleccionaunamanzana.gif') no-repeat center center;
-    background-size: contain; /* Cambiado de "cover" a "contain" */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100%;
-  }
+     background-size: cover; /* Cubrir toda la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Altura mínima del 100% de la ventana */
+}
+
+ion-content::-webkit-scrollbar {
+  display: none; /* Oculta la barra de desplazamiento */
+}
 </style>

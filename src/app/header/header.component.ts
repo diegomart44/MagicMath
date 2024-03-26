@@ -1,9 +1,7 @@
-// header.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-
 import { UserIdService } from '../services/user-id.service';
 
 interface UserData {
@@ -18,12 +16,13 @@ interface UserData {
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
   userName: string = '';
+  headerVisible: boolean = false; // Variable para controlar la visibilidad del contenido del encabezado
 
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
     private firestore: AngularFirestore,
-    private userIdService: UserIdService // Inject the UserIdService
+    private userIdService: UserIdService
   ) {}
 
   ngOnInit() {
@@ -34,7 +33,7 @@ export class HeaderComponent implements OnInit {
           if (doc.exists) {
             const userData = doc.data() as UserData;
             this.userName = userData.nombre;
-            this.userIdService.setUserId(user.uid); // Set the user ID in the service
+            this.userIdService.setUserId(user.uid);
           }
         });
       }
@@ -42,9 +41,13 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.userIdService.clearUserId(); // Clear the user ID when logging out
+    this.userIdService.clearUserId();
     this.afAuth.signOut().then(() => {
       this.router.navigate(['/login']);
     });
+  }
+
+  toggleHeaderVisibility() {
+    this.headerVisible = !this.headerVisible; // Cambiar la visibilidad del contenido del encabezado
   }
 }

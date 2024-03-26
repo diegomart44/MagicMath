@@ -1,5 +1,9 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Botón hamburguesa para mostrar/ocultar el encabezado -->
+      <ion-menu-button (click)="toggleHeaderVisibility()"></ion-menu-button>
+    </ion-buttons>
     <ion-title>
       <!-- Verifica si el usuario está autenticado y muestra su nombre si está disponible -->
       {{ isAuthenticated ? '' + userName : 'Bienvenido' }}

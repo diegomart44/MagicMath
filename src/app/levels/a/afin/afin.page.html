@@ -1,5 +1,5 @@
-<ion-content class="ion-padding" fullscreen>
-  <div class="background-container">
+<ion-content class="ion-padding" fullscreen scroll-y="false">
+  <div class="background-container ion-text-center">
     <div class="ion-text-center">
       <!-- Utiliza *ngIf para condicionar la ruta de redirección -->
       <a id="botonComenzar" [routerLink]="redirectRoute" class="custom-button">
@@ -10,18 +10,22 @@
 </ion-content>
 
 <style>
-  ion-content {
-    --background: transparent;
-  }
+ion-content {
+  --background: transparent;
+}
 
-  .background-container {
-    background: url('../assets/fin.gif') no-repeat center center;
-    background-size: contain; /* Cambiado de "cover" a "contain" */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
+.background-container {
+  background: url('../assets/fin.gif') no-repeat center center fixed; /* Fondo fijo */
+  background-size: cover; /* Cubrir toda la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Altura mínima del 100% de la ventana */
+}
+
+ion-content::-webkit-scrollbar {
+  display: none; /* Oculta la barra de desplazamiento */
+}
+
 </style>

@@ -1,4 +1,4 @@
-<ion-content class="ion-padding" fullscreen>
+<ion-content class="ion-padding" fullscreen scroll-y="false">
   <div class="background-container ion-text-center">
     <ion-grid>
       <ion-row>
@@ -13,8 +13,7 @@
             <img src="assets/icon/2a.png" alt="">
           </button>
         </ion-col>
-  >
-        <ion-col size="10" offset="3">
+      <ion-col size="10" offset="3">
           <button #boton3 routerLink="/levels/c/c3/" class="custom-button3" >
             <img src="assets/icon/3a.png" alt="">
           </button>
@@ -62,13 +61,16 @@
       
         .background-container {
           background: url('../assets/fondo/selecciondenivel.gif') no-repeat center center;
-          background-size: contain; /* Cambiado de "cover" a "contain" */
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          min-height: 100%;
-       
-        }
+            background-size: cover; /* Cubrir toda la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Altura mínima del 100% de la ventana */
+}
+
+ion-content::-webkit-scrollbar {
+  display: none; /* Oculta la barra de desplazamiento */
+}
         
       </style> 
